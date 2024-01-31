@@ -20,7 +20,8 @@ return new class extends Migration
             $table->boolean('is_published');
 
             $table->bigInteger('user_id');
-            $table->bigInteger('category_id');
+            $table->bigInteger('category_id')->unsigned()->default(1); // Default to the ID of your 'Uncategorized' category
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
