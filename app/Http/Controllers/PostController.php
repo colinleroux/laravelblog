@@ -19,7 +19,9 @@ class PostController extends Controller
      */
     public function home(): View
     {
-        $posts = Post::where('is_published', true)->paginate(env('PAGINATE_NUM'));
+        $posts = Post::where('is_published', true)
+            ->orderBy( 'created_at','desc')
+            ->paginate(env('PAGINATE_NUM'));
         $categories = Category::all();
         $tags = Tag::all();
 
@@ -38,9 +40,19 @@ class PostController extends Controller
         $post = Post::find($id);
         $categories = Category::all();
         $tags = Tag::all();
-        $related_posts = Post::where('is_published', true)->whereHas('tags', function (Builder $query) use ($post) {
+        $related_posts = Post::where('is_published', true)
+            ->whereHas('tags', function (Builder $query) use ($post) {
             return $query->whereIn('name', $post->tags->pluck('name'));
-        })->where('id', '!=', $post->id)->take(3)->get();
+        })
+            ->where('id', '!=', $post->id)
+            //choose one of options below - if we want random posts returned or ordered by date??
+            //RANDOM
+              ->inRandomOrder()
+            //DATE
+            //  ->orderBy('created_at', 'desc')
+            //leave above commented to get the same boring 3 first created
+            ->take(3)
+            ->get();
 
         return view('post', [
             'post' => $post,

@@ -13,10 +13,15 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @foreach($posts as $post)
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4 px-4 h-20 flex justify-between items-center">
+                <div>
+                    <img src="{{ Illuminate\Support\Facades\Storage::url($post->cover) }}" alt="cover image" width="200">
+                </div>
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg mb-4 px-4 h-20 flex justify-between items-center">
                 <div class="text-gray-900 dark:text-gray-100">
                     <p>{{ $post->title }}</p>
                 </div>
+
+
                 <div class="space-x-2">
                     <a href="{{ route('posts.edit', ['post' => $post->id]) }}"> <x-primary-button>{{ __('Edit') }}</x-primary-button></a>
                     <form method="post" action="{{ route('posts.destroy', ['post' => $post->id]) }}" class="inline">

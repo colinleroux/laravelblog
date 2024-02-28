@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 // Homepage
 Route::get('/', [PostController::class, 'home'])->name('home');
+// Display contact form
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
+
+// Handle form submission
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 // A list of posts under this category
 Route::get('/category/{category}', [CategoryController::class, 'category'])->name('category');
@@ -41,7 +49,14 @@ Route::post('/search', [PostController::class, 'search'])->name('search');
         return view('dashboard');
     })->middleware(['auth', 'verified'])->name('dashboard');
 
-    // Dashboard category resource
+
+// About page
+Route::get('/about', function () {
+    return view('about');
+})->name('about');
+
+
+// Dashboard category resource
     Route::resource('categories', CategoryController::class);
 
     // Dashboard tag resource

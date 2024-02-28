@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    <title>Blog</title>
+    <title>Blogz</title>
 @endsection
 
 @section('content')
@@ -10,12 +10,12 @@
         <div class="flex flex-col lg:flex-row gap-4 py-10">
 
             <!-- Main Content Section: Takes full width on small screens, adjusted on larger screens -->
-            <div class="w-full lg:flex-1">
+            <div class="w-full lg:w-3/4 xl:w-4/5">
                 <img class="rounded-md object-cover h-96 w-full" src="{{ Storage::url($post->cover) }}" alt="..." />
                 <h1 class="mt-5 mb-2 text-center text-2xl font-bold ">{{ $post->title }}</h1>
                 <p class="mb-5 text-center text-sm text-slate-500 ">By {{ $post->user->name }} | {{ \Carbon\Carbon::parse($post->created_at)->format('M d, Y') }}</p>
 
-                <div class="font-poppins">{!! $post->content !!}</div>
+                <div class="font-poppins pt-6 pl-4 pb-4 pr-4 ring-1 ring-slate-100 rounded-md" >{!! $post->content !!}</div>
 
                 <div class="my-5">
                     @foreach ($post->tags as $tag)

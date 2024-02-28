@@ -26,7 +26,7 @@
                         <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" value="{{ $post->title }}" />
                         <br>
                         <x-input-label for="content">{{ __('Content') }}</x-input-label>
-                        <textarea name="content" id="content" cols="30" rows="30">{{ $post->content }}</textarea>
+                        <textarea name="content" id="blogPostContent" cols="30" rows="30">{{ $post->content }}</textarea>
                         <br>
                         <x-input-label for="cover">{{ __('Update Cover Image') }}</x-input-label>
                         <img src="{{ Illuminate\Support\Facades\Storage::url($post->cover) }}" alt="cover image" width="200">

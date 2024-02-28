@@ -116,7 +116,13 @@ class CategoryController extends Controller
      */
     public function destroy(string $id): RedirectResponse
     {
-        $category = Category::all()->find($id);
+        $category = Category::findOrFail($id);
+
+        // ID of the default 'Uncategorized' category
+        $defaultCategoryId = 1; // Replace with the actual ID of your default category
+
+        // Set the category_id to the default category for all posts in this category
+        $category->posts()->update(['category_id' => $defaultCategoryId]);
 
         $category->delete();
 

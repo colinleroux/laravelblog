@@ -25,7 +25,7 @@
                         <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
                         <br>
                         <x-input-label for="content">{{ __('Content') }}</x-input-label>
-                        <textarea name="content" id="content" cols="30" rows="30"></textarea>
+                        <textarea name="content" id="blogPostContent" cols="30" rows="30"></textarea>
                         <br>
                         <x-input-label for="cover">{{ __('Cover Image') }}</x-input-label>
                         <x-text-input id="cover" name="cover" type="file" class="mt-1 block w-full" required autofocus autocomplete="cover" />
